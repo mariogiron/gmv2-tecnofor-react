@@ -14,6 +14,7 @@ import AuthLayout from './pages/layout/AuthLayout.tsx'
 import Registro from './pages/auth/Registro.tsx'
 import Login from './pages/auth/Login.tsx'
 import ListaEmpleados from './pages/admin/ListaEmpleados.tsx'
+import ProtectedRoute from './components/ProtectedRoute.tsx'
 
 /**
  * APP
@@ -35,7 +36,11 @@ const router = createBrowserRouter([
     children: [
       { path: 'info', element: <Info /> },
       { path: 'sobremi', element: <About /> },
-      { path: 'contacto', element: <Contact /> },
+      {
+        element: <ProtectedRoute isAllowed={false} />, children: [
+          { path: 'contacto', element: <Contact /> },
+        ]
+      },
       {
         path: 'admin',
         element: <AdminLayout />,
